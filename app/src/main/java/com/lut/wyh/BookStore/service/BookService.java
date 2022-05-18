@@ -11,6 +11,4 @@ public interface BookService {
     @GET("bookinfo/book")
     Observable<Inventories> getBookInformation();
 
-    @GET("bookinfo/bookimage")
-    Observable<Inventories> getBookImage();
 }
