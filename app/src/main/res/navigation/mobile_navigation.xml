@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_store"
+        android:name="com.lut.wyh.BookStore.activity.ui.dashboard.BookStoreFragment"
+        android:label="@string/title_store"
+        tools:layout="@layout/fragment_store" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.lut.wyh.BookStore.activity.ui.notifications.NotificationsFragment"
+        android:label="@string/title_recommend"
+        tools:layout="@layout/fragment_recommend" />
+
+    <fragment
+        android:id="@+id/navigation_shoppingtrolley"
+        android:name="com.lut.wyh.BookStore.activity.ui.shoppingtrolley.ShoppingTrolleyFragment"
+        android:label="@string/title_shopping_trolley"
+        tools:layout="@layout/fragment_shoppingtrolley" />
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.lut.wyh.BookStore.activity.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+</navigation>

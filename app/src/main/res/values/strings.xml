@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">BookStore</string>
+    <string name="title_activity_store">MainActivity</string>
+    <string name="title_store">商城</string>
+    <string name="title_recommend">推荐</string>
+    <string name="title_shopping_trolley">购物车</string>
+    <string name="title_home">我的</string>
+    <string name="book_type_textbook">教材</string>
+    <string name="book_type_otherbook">非教材</string>
+    <string name="software_engineering">软件工程</string>
+    <string name="mechanical_engineering">机械工程</string>
+    <string name="electrical_engineering_and_automation">电气工程及其自动化</string>
+    <string name="civil_engineering">土木工程</string>
+    <string name="natural_science">自然科学</string>
+    <string name="the_humanities">人文科学</string>
+    <string name="reference_books">工具书</string>
+    <string name="fiction">小说</string>
+    <string name="painting_set">绘画集</string>
+    <string name="level5_1">某科学的超电磁炮I</string>
+    <string name="book_info">图书信息</string>
+    <string name="comment">评论</string>
+    <string name="collect">收藏</string>
+    <string name="addshoppingtrolley">+购物车</string>
+    <string name="buy">立即购买</string>
+    <string name="to__send">待发货</string>
+    <string name="wait_for_receiving">待收货</string>
+    <string name="to_be_evaluated">待评价</string>
+    <string name="visitors_book_club">游客书友</string>
+    <string name="login">登录</string>
+</resources>
