@@ -6,7 +6,7 @@ public class User {
     private String password;
     private String phonenumber;
     private String email;
-    private int authority;
+    private Integer authority;
     private String shoppingtrolley;
     private String url;
 
@@ -15,7 +15,7 @@ public class User {
         this.password = password;
     }
 
-    public User(Integer id, String name, String password, String phonenumber, String email, int authority, String shoppingtrolley, String url) {
+    public User(Integer id, String name, String password, String phonenumber, String email, Integer authority, String shoppingtrolley, String url) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -66,11 +66,11 @@ public class User {
         this.email = email;
     }
 
-    public int getAuthority() {
+    public Integer getAuthority() {
         return authority;
     }
 
-    public void setAuthority(int authority) {
+    public void setAuthority(Integer authority) {
         this.authority = authority;
     }
 

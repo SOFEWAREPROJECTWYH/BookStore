@@ -9,5 +9,5 @@ import retrofit2.http.POST;
 
 public interface UserService {
     @POST("login")
-    Observable<User> login(@Body User user);
+    Observable<Boolean> login(@Body User user);
 }

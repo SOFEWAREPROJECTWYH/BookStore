@@ -29,16 +29,16 @@ public class UserPresenter {
                 .build();
         UserService userCall=retrofit.create(UserService.class);
         userCall.login(user).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread())
-        .subscribe(new Observer<User>() {
+        .subscribe(new Observer<Boolean>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
-                Log.i(TAG, "onSubscribe: "+"准备递送");
+                Log.i(TAG, "onSubscribe: "+"开始递送");
             }
 
             @Override
-            public void onNext(@NonNull User user) {
+            public void onNext(@NonNull Boolean aBoolean) {
                 Log.i(TAG, "onNext: "+"请求成功");
-                EventBus.getDefault().post(user);
+                EventBus.getDefault().post(aBoolean);
             }
 
             @Override
