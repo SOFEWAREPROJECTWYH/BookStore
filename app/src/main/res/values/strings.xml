@@ -27,4 +27,8 @@
     <string name="to_be_evaluated">待评价</string>
     <string name="visitors_book_club">游客书友</string>
     <string name="login">登录</string>
+    <string name="welcome">欢迎来到LUT图书</string>
+    <string name="account">账号：</string>
+    <string name="password">密码：</string>
+    <string name="register">注册</string>
 </resources>
