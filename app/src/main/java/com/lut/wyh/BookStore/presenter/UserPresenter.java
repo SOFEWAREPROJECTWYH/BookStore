@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserPresenter {
     private final String TAG="UserPresenter";
-    public void loadData(User user){
+    public void login(User user){
         String URL="http://192.168.43.27:8080/";
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(URL)
@@ -29,16 +29,20 @@ public class UserPresenter {
                 .build();
         UserService userCall=retrofit.create(UserService.class);
         userCall.login(user).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread())
-        .subscribe(new Observer<Boolean>() {
+        .subscribe(new Observer<User>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
                 Log.i(TAG, "onSubscribe: "+"开始递送");
             }
 
             @Override
-            public void onNext(@NonNull Boolean aBoolean) {
+            public void onNext(@NonNull User userRet) {
                 Log.i(TAG, "onNext: "+"请求成功");
-                EventBus.getDefault().post(aBoolean);
+                if (user.getPassword().equals(userRet.getPassword())){
+                    EventBus.getDefault().post(userRet);
+                }else{
+                    EventBus.getDefault().post(false);
+                }
             }
 
             @Override
@@ -52,4 +56,38 @@ public class UserPresenter {
             }
         });
     }
+    public void register(User user){
+        String URL="http://192.168.43.27:8080/";
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .build();
+        UserService userCall=retrofit.create(UserService.class);
+        userCall.register(user).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread())
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.i(TAG, "onSubscribe: "+"开始递送");
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Integer integer) {
+                        Log.i(TAG, "onNext: "+"请求成功");
+                        EventBus.getDefault().post(integer);
+                    }
+
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
 }

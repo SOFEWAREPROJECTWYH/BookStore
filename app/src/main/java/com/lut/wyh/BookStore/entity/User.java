@@ -9,13 +9,23 @@ public class User {
     private Integer authority;
     private String shoppingtrolley;
     private String url;
+    private String major;
 
     public User(Integer id, String password) {
         this.id = id;
         this.password = password;
     }
 
-    public User(Integer id, String name, String password, String phonenumber, String email, Integer authority, String shoppingtrolley, String url) {
+    public User(Integer id, String name, String password, String phonenumber, String email, String major) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.phonenumber = phonenumber;
+        this.email = email;
+        this.major = major;
+    }
+
+    public User(Integer id, String name, String password, String phonenumber, String email, Integer authority, String shoppingtrolley, String url, String major) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -24,6 +34,7 @@ public class User {
         this.authority = authority;
         this.shoppingtrolley = shoppingtrolley;
         this.url = url;
+        this.major = major;
     }
 
     public Integer getId() {
@@ -90,6 +101,14 @@ public class User {
         this.url = url;
     }
 
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -101,6 +120,7 @@ public class User {
                 ", authority=" + authority +
                 ", shoppingtrolley='" + shoppingtrolley + '\'' +
                 ", url='" + url + '\'' +
+                ", major='" + major + '\'' +
                 '}';
     }
 }

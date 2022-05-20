@@ -31,4 +31,8 @@
     <string name="account">账号：</string>
     <string name="password">密码：</string>
     <string name="register">注册</string>
+    <string name="phonenumber">电话号码：</string>
+    <string name="email">邮箱：</string>
+    <string name="major">专业：</string>
+    <string name="username">用户昵称</string>
 </resources>
