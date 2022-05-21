@@ -12,6 +12,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lut.wyh.BookStore.R;
+import com.lut.wyh.BookStore.entity.ShoppingTrolley;
+import com.lut.wyh.BookStore.entity.User;
+import com.lut.wyh.BookStore.presenter.ShoppingTrolleyPresenter;
+import com.lut.wyh.BookStore.util.ShardPrefUtils;
 
 public class DetailActivity extends AppCompatActivity {
     private ImageView imageView;
@@ -21,11 +25,14 @@ public class DetailActivity extends AppCompatActivity {
     private ImageView imageViewCollect;
     private Button buttonShop;
     private Button buttonBuy;
+    //用户信息
+    private User userInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         initView();
+        initUserData();
         Intent intent=this.getIntent();
         textViewName.setText(intent.getStringExtra("textname"));
         textViewPrice.setText("￥"+intent.getIntExtra("textprice",0));
@@ -41,5 +48,19 @@ public class DetailActivity extends AppCompatActivity {
         buttonBuy=findViewById(R.id.buy);
         buttonShop.setBackgroundResource(R.drawable.round_radius);
         buttonBuy.setBackgroundResource(R.drawable.round_radius);
+        buttonShop.setOnClickListener(v->{
+            if (userInfo==null) {
+                Toast.makeText(getApplication(),"用户未登录",Toast.LENGTH_SHORT).show();
+            }else{
+                Intent intent=this.getIntent();
+                ShoppingTrolley shoppingTrolley=new ShoppingTrolley(userInfo.getId(),userInfo.getName(),
+                intent.getStringExtra("bookid"),intent.getStringExtra("textname"),
+                        intent.getStringExtra("image"),intent.getStringExtra("price"));
+                new ShoppingTrolleyPresenter().insertShopTro(shoppingTrolley);
+            }
+        });
+    }
+    public void initUserData(){
+        userInfo=(User) ShardPrefUtils.getSerializableEntity(getApplication(),"userInfo");
     }
 }

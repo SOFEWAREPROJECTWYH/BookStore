@@ -29,7 +29,6 @@ public class NotificationsFragment extends Fragment {
         notificationsViewModel =
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_recommend, container, false);
-        EventBus.getDefault().register(this);
         final TextView textView = root.findViewById(R.id.text_notifications);
         notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -39,14 +38,9 @@ public class NotificationsFragment extends Fragment {
         });
         return root;
     }
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onUserEvent(User user){
-        userInfo=user;
-    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        EventBus.getDefault().unregister(this);
     }
 }

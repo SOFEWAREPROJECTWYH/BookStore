@@ -3,7 +3,9 @@ package com.lut.wyh.BookStore.presenter;
 import android.util.Log;
 
 import com.lut.wyh.BookStore.entity.Inventories;
+import com.lut.wyh.BookStore.entity.ShoppingTrolley;
 import com.lut.wyh.BookStore.entity.User;
+import com.lut.wyh.BookStore.event.ShoppingTrolleyEvent;
 import com.lut.wyh.BookStore.service.BookService;
 import com.lut.wyh.BookStore.service.UserService;
 import com.lut.wyh.BookStore.util.ShardPrefUtils;
@@ -77,6 +79,8 @@ public class UserPresenter {
                     public void onNext(@NonNull Integer integer) {
                         Log.i(TAG, "onNext: "+"请求成功");
                         EventBus.getDefault().post(integer);
+                        ShoppingTrolleyEvent shoppingTrolleyEvent=new ShoppingTrolleyEvent(user.getId(),user.getName());
+                        EventBus.getDefault().post(shoppingTrolleyEvent);
                     }
 
 

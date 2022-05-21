@@ -1,5 +1,6 @@
 package com.lut.wyh.BookStore.service;
 
+import com.lut.wyh.BookStore.entity.ShoppingTrolley;
 import com.lut.wyh.BookStore.entity.User;
 
 
@@ -12,4 +13,5 @@ public interface UserService {
     Observable<User> login(@Body User user);
     @POST("register")
     Observable<Integer> register(@Body User user);
+
 }

@@ -9,7 +9,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lut.wyh.BookStore.R;
+import com.lut.wyh.BookStore.entity.ShoppingTrolley;
 import com.lut.wyh.BookStore.entity.User;
+import com.lut.wyh.BookStore.event.ShoppingTrolleyEvent;
+import com.lut.wyh.BookStore.presenter.ShoppingTrolleyPresenter;
 import com.lut.wyh.BookStore.presenter.UserPresenter;
 
 import org.greenrobot.eventbus.EventBus;
@@ -77,6 +80,11 @@ public class RegisterActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this,"注册失败",Toast.LENGTH_SHORT).show();
         }
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onInitShopEvent(ShoppingTrolleyEvent shoppingTrolleyEvent){
+        User usershop=new User(shoppingTrolleyEvent.getId(),shoppingTrolleyEvent.getUsername());
+        new ShoppingTrolleyPresenter().initShop(usershop);
     }
 
     @Override
