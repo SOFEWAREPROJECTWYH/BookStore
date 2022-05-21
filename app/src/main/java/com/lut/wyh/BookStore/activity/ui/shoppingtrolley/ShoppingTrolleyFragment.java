@@ -32,10 +32,6 @@ public class ShoppingTrolleyFragment extends Fragment {
         EventBus.getDefault().register(this);
         return root;
     }
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onUserEvent(User user){
-        userInfo=user;
-    }
 
     @Override
     public void onDestroyView() {

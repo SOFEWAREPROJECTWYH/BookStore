@@ -14,7 +14,6 @@ import java.io.ObjectOutputStream;
 public class ShardPrefUtils {
     private static SharedPreferences mSharedPref;
     private static final String SHAREDPREF_NAME = "UserData";
-    private static Context context;
     /**
      * writeObject 方法负责写入特定类的对象的状态，以便相应的 readObject 方法可以还原它
      * 最后，用Base64.encode将字节文件转换成Base64编码保存在String中
@@ -62,11 +61,11 @@ public class ShardPrefUtils {
     /**
      * 使用SharedPreference保存对象
      *
-     * @param fileKey    储存文件的key
+     * @param context    activity context
      * @param key        储存对象的key
      * @param saveObject 储存的对象
      */
-    public static void saveSerializableEntity(String fileKey, String key, Object saveObject) {
+    public static void saveSerializableEntity(Context context, String key, Object saveObject) {
         if(mSharedPref == null){
             mSharedPref = context.getSharedPreferences(SHAREDPREF_NAME, Context.MODE_PRIVATE);
         }
@@ -79,11 +78,11 @@ public class ShardPrefUtils {
     /**
      * 获取SharedPreference保存的对象
      *
-     * @param fileKey 储存文件的key
+     * @param context activity context
      * @param key     储存对象的key
      * @return object 返回根据key得到的对象
      */
-    public static Object getSerializableEntity(String fileKey, String key) {
+    public static Object getSerializableEntity(Context context, String key) {
         if(mSharedPref == null){
             mSharedPref = context.getSharedPreferences(SHAREDPREF_NAME, Context.MODE_PRIVATE);
         }
