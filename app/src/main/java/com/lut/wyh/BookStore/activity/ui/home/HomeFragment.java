@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.lut.wyh.BookStore.R;
 import com.lut.wyh.BookStore.activity.LoginActivity;
 import com.lut.wyh.BookStore.activity.StoreActivity;
+import com.lut.wyh.BookStore.entity.User;
 import com.lut.wyh.BookStore.entity.UserNick;
 
 import org.greenrobot.eventbus.EventBus;
@@ -25,7 +26,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class HomeFragment extends Fragment {
     private final String TAG="HomeFragment";
-
+    //用户信息
+    private User userInfo;
     private HomeViewModel homeViewModel;
     private Button button;
     private TextView userName;
@@ -50,7 +52,10 @@ public class HomeFragment extends Fragment {
             button.setVisibility(View.GONE);
         }
     }
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUserEvent(User user){
+        userInfo=user;
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();

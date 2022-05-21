@@ -28,6 +28,7 @@ import com.lut.wyh.BookStore.adapter.ListPagerAdapter;
 import com.lut.wyh.BookStore.adapter.RecyclerViewAdapter;
 import com.lut.wyh.BookStore.entity.Inventories;
 import com.lut.wyh.BookStore.entity.Inventory;
+import com.lut.wyh.BookStore.entity.User;
 import com.lut.wyh.BookStore.event.InventoryEvent;
 import com.lut.wyh.BookStore.presenter.BookPresenter;
 
@@ -43,6 +44,8 @@ import java.util.zip.Inflater;
 public class BookStoreFragment extends Fragment {
 
     private BookStoreViewModel bookStoreViewModel;
+    //用户信息
+    private User userInfo;
     private ViewPager viewPagerTextBook;
     private ViewPager viewPagerOtherBook;
     private TextView textbook;
@@ -277,6 +280,10 @@ public class BookStoreFragment extends Fragment {
     public void onEvent(Inventories inventories){
         inventoryList=inventories.getInventoryList();
         initRecycler();
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUserEvent(User user){
+        userInfo=user;
     }
     private void initRecycler() {
         recyclerView=soft.findViewById(R.id.recycler);

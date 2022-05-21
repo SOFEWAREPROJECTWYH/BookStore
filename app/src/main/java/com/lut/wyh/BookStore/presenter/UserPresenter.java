@@ -6,6 +6,7 @@ import com.lut.wyh.BookStore.entity.Inventories;
 import com.lut.wyh.BookStore.entity.User;
 import com.lut.wyh.BookStore.service.BookService;
 import com.lut.wyh.BookStore.service.UserService;
+import com.lut.wyh.BookStore.util.ShardPrefUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -40,6 +41,7 @@ public class UserPresenter {
                 Log.i(TAG, "onNext: "+"请求成功");
                 if (user.getPassword().equals(userRet.getPassword())){
                     EventBus.getDefault().post(userRet);
+                    ShardPrefUtils.saveSerializableEntity(null,"userInfo",userRet);
                 }else{
                     EventBus.getDefault().post(false);
                 }

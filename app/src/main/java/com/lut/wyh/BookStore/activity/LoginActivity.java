@@ -1,8 +1,10 @@
 package com.lut.wyh.BookStore.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -16,6 +18,9 @@ import com.lut.wyh.BookStore.presenter.UserPresenter;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.Map;
+import java.util.Set;
 
 public class LoginActivity extends AppCompatActivity {
     private final String TAG="LoginActivity";
