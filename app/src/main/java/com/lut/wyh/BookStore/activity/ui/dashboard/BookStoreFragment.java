@@ -293,7 +293,7 @@ public class BookStoreFragment extends Fragment {
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerViewAdapter.setOnItemClickListener((v, position) -> {
             Intent intent=new Intent(this.getActivity(), DetailActivity.class);
-            intent.putExtra("bookid",inventoryList.get(position).getBookid());
+            intent.putExtra("bookid",inventoryList.get(position).getBookid().toString());
             intent.putExtra("image",inventoryList.get(position).getUrl());
             intent.putExtra("textname",inventoryList.get(position).getBookname());
             intent.putExtra("textprice",inventoryList.get(position).getPrice());

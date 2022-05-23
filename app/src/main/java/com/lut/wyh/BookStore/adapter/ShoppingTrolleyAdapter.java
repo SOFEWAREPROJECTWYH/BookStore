@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.lut.wyh.BookStore.R;
 import com.lut.wyh.BookStore.entity.ShoppingTrolley;
 
@@ -22,6 +23,7 @@ public class ShoppingTrolleyAdapter extends  RecyclerView.Adapter<ShoppingTrolle
     private List<String> urls;
     private List<String> productNames;
     private List<String> productPrices;
+    private Context contextFragment;
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private RadioButton radioButton;
         private ImageView imageView;
@@ -48,11 +50,14 @@ public class ShoppingTrolleyAdapter extends  RecyclerView.Adapter<ShoppingTrolle
         this.urls=urls;
         this.productNames=names;
         this.productPrices=prices;
+        contextFragment=context;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ShoppingTrolleyAdapter.ViewHolder holder, int position) {
-
+        holder.productName.setText(productNames.get(position));
+        holder.productPrice.setText(productPrices.get(position));
+        Glide.with(contextFragment).load(urls.get(position)).into(holder.imageView);
     }
 
     @Override

@@ -60,7 +60,6 @@ public class ShoppingTrolleyFragment extends Fragment {
         recyclerView=shop.findViewById(R.id.recycler_shopping_trolley);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         new ShoppingTrolleyPresenter().getShopTro(userInfo);
-
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onShoppingEvent(ShoppingTrolley shoppingTrolley){

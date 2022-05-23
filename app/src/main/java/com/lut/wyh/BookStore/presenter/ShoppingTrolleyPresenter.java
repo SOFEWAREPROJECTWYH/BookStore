@@ -8,6 +8,7 @@ import com.lut.wyh.BookStore.activity.StoreActivity;
 import com.lut.wyh.BookStore.activity.ui.shoppingtrolley.ShoppingTrolleyFragment;
 import com.lut.wyh.BookStore.entity.ShoppingTrolley;
 import com.lut.wyh.BookStore.entity.User;
+import com.lut.wyh.BookStore.event.InsertShopTroEvent;
 import com.lut.wyh.BookStore.service.ShoppingTrolleyService;
 import com.lut.wyh.BookStore.service.UserService;
 
@@ -23,7 +24,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ShoppingTrolleyPresenter {
     private final String TAG="ShoppingTrolley";
-    private Context context;
     public void initShop(User user) {
         String URL = "http://192.168.43.27:8080/";
         Retrofit retrofit = new Retrofit.Builder()
@@ -107,7 +107,8 @@ public class ShoppingTrolleyPresenter {
                     @Override
                     public void onNext(@NonNull Integer change) {
                         Log.i(TAG, "onNext: "+"请求成功");
-                        Toast.makeText(context,"已成功加入购物车!",Toast.LENGTH_SHORT).show();
+                        InsertShopTroEvent insertShopTroEvent=new InsertShopTroEvent(change);
+                        EventBus.getDefault().post(insertShopTroEvent);
                     }
 
 

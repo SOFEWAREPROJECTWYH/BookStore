@@ -14,8 +14,13 @@ import com.bumptech.glide.Glide;
 import com.lut.wyh.BookStore.R;
 import com.lut.wyh.BookStore.entity.ShoppingTrolley;
 import com.lut.wyh.BookStore.entity.User;
+import com.lut.wyh.BookStore.event.InsertShopTroEvent;
 import com.lut.wyh.BookStore.presenter.ShoppingTrolleyPresenter;
 import com.lut.wyh.BookStore.util.ShardPrefUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class DetailActivity extends AppCompatActivity {
     private ImageView imageView;
@@ -31,6 +36,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        EventBus.getDefault().register(this);
         initView();
         initUserData();
         Intent intent=this.getIntent();
@@ -62,5 +68,15 @@ public class DetailActivity extends AppCompatActivity {
     }
     public void initUserData(){
         userInfo=(User) ShardPrefUtils.getSerializableEntity(getApplication(),"userInfo");
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(InsertShopTroEvent insertShopTroEvent){
+        Toast.makeText(this,"已添加到购物车！！！",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
