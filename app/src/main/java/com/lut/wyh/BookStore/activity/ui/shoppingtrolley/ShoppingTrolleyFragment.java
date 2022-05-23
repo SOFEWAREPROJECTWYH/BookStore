@@ -44,6 +44,7 @@ public class ShoppingTrolleyFragment extends Fragment {
         shoppingTrolleyModel =
                 new ViewModelProvider(this).get(ShoppingTrolleyModel.class);
         View root = inflater.inflate(R.layout.fragment_shoppingtrolley, container, false);
+        EventBus.getDefault().register(this);
         shop=root;
         initUserData();
         return root;
@@ -57,7 +58,7 @@ public class ShoppingTrolleyFragment extends Fragment {
         initShoppingTrolley();
     }
     public void initShoppingTrolley(){
-        recyclerView=shop.findViewById(R.id.recycler_shopping_trolley);
+        recyclerView=shop.findViewById(R.id.recycler_shoptro);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         new ShoppingTrolleyPresenter().getShopTro(userInfo);
     }
@@ -102,5 +103,6 @@ public class ShoppingTrolleyFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        EventBus.getDefault().unregister(this);
     }
 }

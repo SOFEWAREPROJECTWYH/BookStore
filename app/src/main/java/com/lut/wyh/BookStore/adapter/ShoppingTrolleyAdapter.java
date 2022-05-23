@@ -62,6 +62,6 @@ public class ShoppingTrolleyAdapter extends  RecyclerView.Adapter<ShoppingTrolle
 
     @Override
     public int getItemCount() {
-        return 0;
+        return ids.size();
     }
 }

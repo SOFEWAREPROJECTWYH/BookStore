@@ -73,7 +73,7 @@ public class ShoppingTrolleyPresenter {
 
                     @Override
                     public void onNext(@NonNull ShoppingTrolley shoppingTrolley) {
-                        Log.i(TAG, "onNext: "+"请求成功");
+                        Log.i(TAG, "onNext: "+"请求成功"+" "+shoppingTrolley);
                         EventBus.getDefault().post(shoppingTrolley);
                     }
 
