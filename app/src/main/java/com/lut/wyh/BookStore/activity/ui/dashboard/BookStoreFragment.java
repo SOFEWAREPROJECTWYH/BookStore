@@ -296,7 +296,7 @@ public class BookStoreFragment extends Fragment {
             intent.putExtra("bookid",inventoryList.get(position).getBookid().toString());
             intent.putExtra("image",inventoryList.get(position).getUrl());
             intent.putExtra("textname",inventoryList.get(position).getBookname());
-            intent.putExtra("textprice",inventoryList.get(position).getPrice());
+            intent.putExtra("textprice",inventoryList.get(position).getPrice().toString());
             startActivity(intent);
         });
 

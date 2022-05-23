@@ -41,7 +41,7 @@ public class DetailActivity extends AppCompatActivity {
         initUserData();
         Intent intent=this.getIntent();
         textViewName.setText(intent.getStringExtra("textname"));
-        textViewPrice.setText("￥"+intent.getIntExtra("textprice",0));
+        textViewPrice.setText("￥"+intent.getStringExtra("textprice"));
         Glide.with(this).load(intent.getStringExtra("image")).into(imageView);
     }
     public void initView(){
@@ -61,7 +61,7 @@ public class DetailActivity extends AppCompatActivity {
                 Intent intent=this.getIntent();
                 ShoppingTrolley shoppingTrolley=new ShoppingTrolley(userInfo.getId(),userInfo.getName(),
                 intent.getStringExtra("bookid"),intent.getStringExtra("textname"),
-                        intent.getStringExtra("image"),intent.getStringExtra("price"));
+                        intent.getStringExtra("image"),intent.getStringExtra("textprice"));
                 new ShoppingTrolleyPresenter().insertShopTro(shoppingTrolley);
             }
         });
