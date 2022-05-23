@@ -36,4 +36,6 @@
     <string name="major">专业：</string>
     <string name="username">用户昵称</string>
     <string name="log_out">退出登录</string>
+    <string name="delete_product">删除商品</string>
+    <string name="settle_account">结算</string>
 </resources>
