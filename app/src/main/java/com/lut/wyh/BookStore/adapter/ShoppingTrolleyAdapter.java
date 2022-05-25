@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingTrolleyAdapter extends  RecyclerView.Adapter<ShoppingTrolleyAdapter.ViewHolder> {
-    private static List<String> idsS;
+    private static List<String> idsS=new ArrayList<>();
     private static List<String> urlsS;
     private static List<String> productNamesS;
     private static List<String> productPricesS;

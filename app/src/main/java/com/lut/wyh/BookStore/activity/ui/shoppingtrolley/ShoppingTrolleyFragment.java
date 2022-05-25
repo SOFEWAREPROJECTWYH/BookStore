@@ -70,6 +70,9 @@ public class ShoppingTrolleyFragment extends Fragment {
                     urls.remove(flag);
                     productNames.remove(flag);
                     productPrices.remove(flag);
+                    ShoppingTrolleyAdapter.ViewHolder viewHolder=(ShoppingTrolleyAdapter.ViewHolder)recyclerView.findViewHolderForAdapterPosition(flag);
+                    CheckBox checkBox=viewHolder.itemView.findViewById(R.id.checkbox);
+                    checkBox.setChecked(false);
                 }
                 shoppingTrolleyAdapterTemp.updateData(productids,urls,productNames,productPrices);
                 shoppingTrolleyAdapterTemp.getChecked().clear();
