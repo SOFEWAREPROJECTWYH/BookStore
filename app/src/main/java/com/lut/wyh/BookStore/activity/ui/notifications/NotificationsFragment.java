@@ -22,13 +22,22 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.lut.wyh.BookStore.R;
+import com.lut.wyh.BookStore.adapter.CommentAdapter;
+import com.lut.wyh.BookStore.entity.Comment;
+import com.lut.wyh.BookStore.entity.Comments;
 import com.lut.wyh.BookStore.entity.User;
+import com.lut.wyh.BookStore.presenter.CommentPresenter;
 import com.lut.wyh.BookStore.search.BCallBack;
 import com.lut.wyh.BookStore.search.ICallBack;
 import com.lut.wyh.BookStore.search.SearchListView;
 import com.lut.wyh.BookStore.sqlite.RecordSQLiteOpenHelper;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -36,6 +45,7 @@ import static android.view.View.VISIBLE;
 public class NotificationsFragment extends Fragment {
 
     private NotificationsViewModel notificationsViewModel;
+    private Comments comments;
     // 搜索框组件
     private EditText et_search; // 搜索按键
     private LinearLayout search_block; // 搜索框布局
@@ -44,7 +54,8 @@ public class NotificationsFragment extends Fragment {
     // 回调接口
     private ICallBack mCallBack;// 搜索按键回调接口
     private BCallBack bCallBack; // 返回按键回调接口
-
+    private RecyclerView recyclerView;
+    private CommentAdapter commentAdapter;
     // ListView列表 & 适配器
     private SearchListView searchListView;
     private BaseAdapter adapter;
@@ -53,26 +64,40 @@ public class NotificationsFragment extends Fragment {
     private SQLiteDatabase db;
     //用户信息
     private User userInfo;
+    private View view;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel =
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
         View root = inflater.inflate(R.layout.layout_search, container, false);
-        initView(root);
+        view=root;
+        initData();
         return root;
     }
-    private void initView(View view){
+    public void initData(){
+        new CommentPresenter().loadData();
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Comments comments){
+        this.comments=comments;
+        initView();
+    }
+    private void initView(){
         // 2. 绑定搜索框EditText
-        et_search = (EditText)view.findViewById(R.id.et_search);
+        et_search = view.findViewById(R.id.et_search);
         // 3. 搜索框背景颜色
-        search_block = (LinearLayout)view.findViewById(R.id.search_block);
+        search_block = view.findViewById(R.id.search_block);
         // 4. 历史搜索记录 = ListView显示
-        searchListView = (SearchListView)view.findViewById(R.id.searchListView);
+        searchListView = view.findViewById(R.id.searchListView);
         // 实例化数据库SQLiteOpenHelper子类对象
         helper = new RecordSQLiteOpenHelper(getContext());
         // 5. 删除历史搜索记录 按钮
-        tv_clear = (TextView)view.findViewById(R.id.tv_clear);
+        tv_clear = view.findViewById(R.id.tv_clear);
         tv_clear.setVisibility(INVISIBLE); // 初始状态 = 不可见
+        recyclerView=view.findViewById(R.id.feel_exper);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        commentAdapter=new CommentAdapter(comments.getComments(),getActivity());
+        recyclerView.setAdapter(commentAdapter);
         et_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

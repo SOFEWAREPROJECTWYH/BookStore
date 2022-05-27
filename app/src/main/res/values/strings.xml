@@ -38,4 +38,5 @@
     <string name="log_out">退出登录</string>
     <string name="delete_product">删除商品</string>
     <string name="settle_account">结算</string>
+    <string name="username_feel">用户名</string>
 </resources>
