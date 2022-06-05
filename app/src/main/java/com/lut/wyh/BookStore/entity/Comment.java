@@ -1,6 +1,7 @@
 package com.lut.wyh.BookStore.entity;
 
 public class Comment {
+    private String id;
     private String name;
     private String url;
     private String title;
@@ -10,7 +11,12 @@ public class Comment {
     private String comment;
     private String share;
 
-    public Comment(String name, String url, String title, String content, String bookurl, String like, String comment, String share) {
+    public Comment(String title) {
+        this.title = title;
+    }
+
+    public Comment(String id, String name, String url, String title, String content, String bookurl, String like, String comment, String share) {
+        this.id = id;
         this.name = name;
         this.url = url;
         this.title = title;
@@ -19,6 +25,14 @@ public class Comment {
         this.like = like;
         this.comment = comment;
         this.share = share;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -88,7 +102,8 @@ public class Comment {
     @Override
     public String toString() {
         return "Comment{" +
-                "name='" + name + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 ", url='" + url + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +

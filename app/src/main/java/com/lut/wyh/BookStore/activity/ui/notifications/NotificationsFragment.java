@@ -1,16 +1,18 @@
 package com.lut.wyh.BookStore.activity.ui.notifications;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,17 +32,20 @@ import com.lut.wyh.BookStore.adapter.CommentAdapter;
 import com.lut.wyh.BookStore.entity.Comment;
 import com.lut.wyh.BookStore.entity.Comments;
 import com.lut.wyh.BookStore.entity.User;
+import com.lut.wyh.BookStore.event.CommentEvent;
 import com.lut.wyh.BookStore.presenter.CommentPresenter;
 import com.lut.wyh.BookStore.search.BCallBack;
 import com.lut.wyh.BookStore.search.ICallBack;
 import com.lut.wyh.BookStore.search.SearchListView;
 import com.lut.wyh.BookStore.sqlite.RecordSQLiteOpenHelper;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
+import static androidx.core.content.ContextCompat.getSystemService;
 
 public class NotificationsFragment extends Fragment {
 
@@ -50,7 +55,7 @@ public class NotificationsFragment extends Fragment {
     private EditText et_search; // 搜索按键
     private LinearLayout search_block; // 搜索框布局
     private ImageView searchBack; // 返回按键
-
+    private Button search;
     // 回调接口
     private ICallBack mCallBack;// 搜索按键回调接口
     private BCallBack bCallBack; // 返回按键回调接口
@@ -71,6 +76,7 @@ public class NotificationsFragment extends Fragment {
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
         View root = inflater.inflate(R.layout.layout_search, container, false);
         view=root;
+        EventBus.getDefault().register(this);
         initData();
         return root;
     }
@@ -83,6 +89,7 @@ public class NotificationsFragment extends Fragment {
         initView();
     }
     private void initView(){
+        search=view.findViewById(R.id.search);
         // 2. 绑定搜索框EditText
         et_search = view.findViewById(R.id.et_search);
         // 3. 搜索框背景颜色
@@ -119,14 +126,41 @@ public class NotificationsFragment extends Fragment {
 
             }
         });
-        searchListView.setOnItemClickListener((AdapterView.OnItemClickListener) (parent, view1, position, id) -> {
+        searchListView.setOnItemClickListener((parent, view1, position, id) -> {
             // 获取用户点击列表里的文字,并自动填充到搜索框内
-            TextView textView = (TextView) view1.findViewById(android.R.id.text1);
+            TextView textView = view1.findViewById(android.R.id.text1);
             String name = textView.getText().toString();
             et_search.setText(name);
             Toast.makeText(getContext(), name, Toast.LENGTH_SHORT).show();
         });
-
+        search.setOnClickListener(v->{
+            if (et_search.getText().toString().equals("")){
+                Toast.makeText(getContext(),"输入为空！",Toast.LENGTH_SHORT).show();
+            }else{
+                new CommentPresenter().refreshData(et_search.getText().toString());
+            }
+        });
+        et_search.setOnEditorActionListener((v,actionId,event)->{
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                //点击搜索的时候隐藏软键盘
+                hideKeyboard();
+                // 在这里写搜索的操作,一般都是网络请求数据
+                new CommentPresenter().refreshData(et_search.getText().toString());
+                return true;
+            }
+            return false;
+        });
+    }
+    public void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm!=null){
+            imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onRefreshEvent(CommentEvent commentEvent){
+        commentAdapter.updateData(commentEvent.getRefreshData());
+        commentAdapter.notifyDataSetChanged();
     }
     /**
      * 关注1
@@ -168,5 +202,6 @@ public class NotificationsFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        EventBus.getDefault().unregister(this);
     }
 }

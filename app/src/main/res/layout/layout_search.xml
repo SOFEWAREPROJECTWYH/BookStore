@@ -27,14 +27,21 @@
 <!--         搜索框（采用上面写的自定义EditText-->
         <com.lut.wyh.BookStore.search.EditTextClear
             android:id="@+id/et_search"
-            android:layout_width="match_parent"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:drawablePadding="8dp"
             android:gravity="start|center_vertical"
             android:imeOptions="actionSearch"
-            android:singleLine="true"/>
+            android:singleLine="true"
+            android:maxLines="1"/>
 <!--         最后2行 = 更换输入键盘按钮：换行 ->>搜索-->
+        <Button
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/search"/>
 
 
     </LinearLayout>
@@ -68,5 +75,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/feel_exper"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"/>
 </LinearLayout>

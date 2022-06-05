@@ -39,4 +39,5 @@
     <string name="delete_product">删除商品</string>
     <string name="settle_account">结算</string>
     <string name="username_feel">用户名</string>
+    <string name="search">搜索</string>
 </resources>

@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingTrolleyAdapter extends  RecyclerView.Adapter<ShoppingTrolleyAdapter.ViewHolder> {
-    private static List<String> idsS=new ArrayList<>();
+    private static List<String> idsS;
     private static List<String> urlsS;
     private static List<String> productNamesS;
     private static List<String> productPricesS;
@@ -74,8 +75,10 @@ public class ShoppingTrolleyAdapter extends  RecyclerView.Adapter<ShoppingTrolle
         holder.checkBox.setOnCheckedChangeListener((v,isChecked)->{
             if (isChecked){
                 ids_dispose.add(idsS.get(position));
-            }else{
-                ids_dispose.remove(idsS.get(position));
+            }else {
+                if (idsS.size()!=0){
+                    ids_dispose.remove(idsS.get(position));
+                }
             }
         });
     }

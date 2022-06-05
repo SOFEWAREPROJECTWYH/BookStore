@@ -1,6 +1,7 @@
 package com.lut.wyh.BookStore.activity.ui.shoppingtrolley;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,8 +104,9 @@ public class ShoppingTrolleyFragment extends Fragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onShoppingEvent(ShoppingTrolley shoppingTrolley){
         if (shoppingTrolley.getShoptrobookid()==null){
-            shoppingTrolleyAdapter=new ShoppingTrolleyAdapter(null,null,null,null,this.getActivity());
-            recyclerView.setAdapter(shoppingTrolleyAdapter);
+//            shoppingTrolleyAdapter=new ShoppingTrolleyAdapter(null,null,null,null,this.getActivity());
+//            recyclerView.setAdapter(shoppingTrolleyAdapter);
+            Toast.makeText(getActivity(),"您的购物车是空的！",Toast.LENGTH_SHORT).show();
         }else if (!shoppingTrolley.getShoptrobookid().contains(";")){
             productids.add(shoppingTrolley.getShoptrobookid());
             urls.add(shoppingTrolley.getShoptrobookurl());

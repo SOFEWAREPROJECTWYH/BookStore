@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder>{
-    private List<Comment> commentList;
+    private static List<Comment> commentList;
     private Context context;
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private RoundedImageView headImageExper;
@@ -40,9 +40,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             share= view.findViewById(R.id.share_exper);
         }
     }
+
     public CommentAdapter(List<Comment> comments, Context context){
         commentList=comments;
         this.context=context;
+    }
+    public void updateData(List<Comment> comments){
+        commentList=comments;
     }
     @NonNull
     @Override
