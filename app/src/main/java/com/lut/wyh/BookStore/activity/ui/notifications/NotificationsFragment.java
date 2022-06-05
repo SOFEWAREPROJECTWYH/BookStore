@@ -43,6 +43,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.Objects;
+
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static androidx.core.content.ContextCompat.getSystemService;
@@ -152,7 +154,7 @@ public class NotificationsFragment extends Fragment {
         });
     }
     public void hideKeyboard() {
-        InputMethodManager imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm!=null){
             imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
         }
