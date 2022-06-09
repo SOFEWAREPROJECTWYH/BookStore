@@ -79,6 +79,10 @@ public class DetailActivity extends AppCompatActivity {
             }
 
         });
+        imageViewComment.setOnClickListener(v->{
+            Intent intent=new Intent(DetailActivity.this,DiscussActivity.class);
+            startActivity(intent);
+        });
         imageViewCollect.setOnClickListener(v->{
             if (collectText.getText().toString().equals("收藏")){
                 collectText.setText("已收藏");
