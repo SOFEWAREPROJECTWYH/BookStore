@@ -80,8 +80,13 @@ public class DetailActivity extends AppCompatActivity {
 
         });
         imageViewComment.setOnClickListener(v->{
-            Intent intent=new Intent(DetailActivity.this,DiscussActivity.class);
-            startActivity(intent);
+            Intent intent=this.getIntent();
+            Intent intentNext=new Intent(DetailActivity.this,DiscussActivity.class);
+            intentNext.putExtra("url",intent.getStringExtra("image"));
+            intentNext.putExtra("name",intent.getStringExtra("textname"));
+            intentNext.putExtra("price",intent.getStringExtra("textprice"));
+            intentNext.putExtra("type",intent.getStringExtra("type"));
+            startActivity(intentNext);
         });
         imageViewCollect.setOnClickListener(v->{
             if (collectText.getText().toString().equals("收藏")){
